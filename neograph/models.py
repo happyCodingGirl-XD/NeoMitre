@@ -232,7 +232,10 @@ class MitreServer(Server):
                         if not isinstance(obj,dict) and hasattr(obj,'revoked') and obj.revoked:
                             pass
                         else:
-                            self._get_or_update_obj(obj)
+                            try:
+                                self._get_or_update_obj(obj)
+                            except Exception as e:
+                                print(f'{e}, for object {obj}')
                 for obj in rel:
                     self._get_or_update_obj(obj)
         self.save()

@@ -1,3 +1,4 @@
+# settings.py
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -125,10 +126,10 @@ CELERY_BROKER_URL = 'pyamqp://guest:guest@localhost//'
 CELERY_RESULT_BACKEND = 'rpc://'
 
 # logging
-# settings.py
-import os
-
 LOGGING_DIR = os.path.join(BASE_DIR, 'logs')  # Specify the directory where logs will be stored
+# Ensure the 'logs' directory exists, create it if it doesn't
+if not os.path.exists(LOGGING_DIR):
+    os.makedirs(LOGGING_DIR)
 
 LOGGING = {
     'version': 1,
