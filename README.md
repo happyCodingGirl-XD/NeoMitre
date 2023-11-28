@@ -1,7 +1,7 @@
 # MITRE ATT&CK Visualization
 
 MITRE ATT&CK Visualization is a Django-based web application designed for managing and visualizing relationships between cybersecurity entities, utilizing the MITRE ATT&CK framework. The project integrates with Neo4j for graph database storage, connects to Taxii servers for threat intelligence data, and employs D3.js for interactive data visualization.
-![Search sample](neograph\static\neograph\image\2023-10-11-search-mitre.png)
+![Search sample](neograph/static/neograph/image/2023-10-11-search-mitre.png)
 
 ## Table of Contents
 
@@ -46,9 +46,10 @@ MITRE ATT&CK Visualization is a Django-based web application designed for managi
 
     ```bash
     python manage.py shell
-
+    ```
     from neograph.models import MitreServer
     server,created = MitreServer.objects.get_or_create(url='https://cti-taxii.mitre.org/taxii/')
     server.update_data()
-    ```
+
+   
 
