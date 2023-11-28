@@ -1,0 +1,41 @@
+version: '3'
+services:
+  neo-db:
+    image: neo4j:4.3.3-community 
+    container_name: neo4j-container
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    networks:
+      - neo_mitre_network
+    env_file:
+      - .env 
+    volumes:
+      - ${HOME}/neo4j/data:/data 
+      - ${HOME}/neo4j/logs:/logs 
+      - ${HOME}/neo4j/import:/var/lib/neo4j/import 
+      - ${HOME}/neo4j/plugins:/plugins 
+
+  web:
+    build:
+      context: .
+    image: neomitre:0.01
+    container_name: web-container
+    env_file:
+      - .env 
+    ports:
+      - "8000:8000"
+    depends_on:
+      - neo-db
+    networks:
+      - neo_mitre_network
+    command: ["bash", "-c", "python manage.py makemigrations &&
+                             python manage.py migrate && 
+                             python manage.py createsuperuser --no-input || true && 
+                             python manage.py runserver 0.0.0.0:8000"]
+    restart: on-failure 
+
+networks:
+  neo_mitre_network:
+    driver: bridge
+

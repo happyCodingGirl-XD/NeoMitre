@@ -9,22 +9,23 @@ class RelManager():
     def __init__(self, **kwargs):
         source_type = kwargs['source_ref'].split('--')[0]
         target_type = kwargs['target_ref'].split('--')[0]
-        source_obj_type = MAP_OBJ[source_type]
-        target_obj_type = MAP_OBJ[target_type]
-        source_obj = source_obj_type.nodes.get_or_none(stix_id=kwargs['source_ref'])
-        target_obj = target_obj_type.nodes.get_or_none(stix_id=kwargs['target_ref'])
+        try:
+            source_obj_type = MAP_OBJ[source_type]
+            target_obj_type = MAP_OBJ[target_type]
+            source_obj = source_obj_type.nodes.get_or_none(stix_id=kwargs['source_ref'])
+            target_obj = target_obj_type.nodes.get_or_none(stix_id=kwargs['target_ref'])
 
-        if source_obj and target_obj:
-            rel_attr = target_type.replace('-','_')
-            rel = None
-            try:
-                rel = getattr(source_obj,rel_attr).relationship(target_obj)
-            except Exception as e:
+            if source_obj and target_obj:
+                rel_attr = target_type.replace('-','_')
+                rel = None
+                try:
+                    rel = getattr(source_obj,rel_attr).relationship(target_obj)
+                except Exception as e:
+                    pass
+                if rel is None:
+                    getattr(source_obj, rel_attr).connect(target_obj,kwargs)
+        except Exception as e:
                 pass
-            if rel is None:
-                getattr(source_obj, rel_attr).connect(target_obj,kwargs)
-        else:
-            pass
 
 class StixObject(DjangoNode):
     __abstract_node__ = None

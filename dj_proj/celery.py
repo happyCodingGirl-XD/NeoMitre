@@ -24,30 +24,3 @@ app.conf.beat_schedule = {
 }
 
 app.conf.timezone = 'UTC'
-
-
-''''
-
-from __future__ import absolute_import, unicode_literals
-from celery import Celery
-import os
-# Set the default Django settings module for the 'celery' program.
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dj_proj.settings')
-
-app = Celery('dj_proj')
-
-# Configure Celery with settings from a separate configuration module
-app.config_from_object('django.conf:settings', namespace='CELERY')
-
-# Optional: Load task modules from all registered Django app configs.
-app.autodiscover_tasks()
-
-@app.task(bind=True)
-def debug_task(self):
-    print('Request: {0!r}'.format(self.request))
-
-from neograph.tasks import neograph_beat_schedule
-app.conf.beat_schedule = {
-    **neograph_beat_schedule,
-}
-'''
