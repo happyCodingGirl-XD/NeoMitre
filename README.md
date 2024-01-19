@@ -44,12 +44,11 @@ MITRE ATT&CK Visualization is a Django-based web application designed for managi
     docker exec -it c7becaf2a68c /bin/bash
     ```
 
-    ```bash
+    ```markdown
     python manage.py shell
-    ```
+    
     from neograph.models import MitreServer
     server,created = MitreServer.objects.get_or_create(url='https://cti-taxii.mitre.org/taxii/')
     server.update_data()
 
-   
 
