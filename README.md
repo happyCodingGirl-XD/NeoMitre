@@ -50,5 +50,20 @@ MITRE ATT&CK Visualization is a Django-based web application designed for managi
     from neograph.models import MitreServer
     server,created = MitreServer.objects.get_or_create(url='https://cti-taxii.mitre.org/taxii/')
     server.update_data()
+    ```
+
+4. The sample .env file
+   ```markdown
+    NEO_USER=neo4j
+    NEO_PWD=neo4j
+    NEO_SERVER=neo4j-container
+    NEO_PORT=7687
+    NEO4J_AUTH=neo4j/neo4j
+    NEO4J_ACCEPT_LICENSE_AGREEMENT=yes
+    NEO4J_dbms_memory_pagecache_size=512M
+    DJANGO_SUPERUSER_USERNAME=the_admin
+    DJANGO_SUPERUSER_EMAIL=the_admin@admin.com
+    DJANGO_SUPERUSER_PASSWORD=admin_pass   
+  ```
 
 
