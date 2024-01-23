@@ -1,7 +1,7 @@
 version: '3'
 services:
   neo-db:
-    image: neo4j:4.3.3-community 
+    image: neo4j:5-community-bullseye
     container_name: neo4j-container
     ports:
       - "7474:7474"
@@ -11,8 +11,8 @@ services:
     env_file:
       - .env 
     volumes:
-      - ./neo4j/data:/data  # Mount a volume for Neo4j data
-      - ./neo4j/logs:/logs  # Mount a volume for Neo4j logs
+      - neo4j_data:/data  # Mount a volume for Neo4j data
+      - neo4j_log:/logs  # Mount a volume for Neo4j logs
 
   web:
     build:
@@ -36,4 +36,7 @@ services:
 networks:
   neo_mitre_network:
     driver: bridge
+volumes:
+  neo4j_data:
+  neo4j_log:
 
