@@ -56,7 +56,7 @@ MITRE ATT&CK Visualization is a Django-based web application designed for managi
    ```markdown
     NEO_USER=neo4j
     NEO_PWD=neo4j
-    NEO_SERVER=neo4j-container
+    NEO_SERVER=neo-db
     NEO_PORT=7687
     NEO4J_AUTH=neo4j/neo4j
     NEO4J_ACCEPT_LICENSE_AGREEMENT=yes
@@ -65,5 +65,4 @@ MITRE ATT&CK Visualization is a Django-based web application designed for managi
     DJANGO_SUPERUSER_EMAIL=the_admin@admin.com
     DJANGO_SUPERUSER_PASSWORD=admin_pass   
   ```
-
 
